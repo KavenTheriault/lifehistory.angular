@@ -19,11 +19,11 @@ angular.module('myApp.signin', ['ngRoute'])
 
             $scope.dataLoading = true;
             AuthenticationService.Login($scope.username, $scope.password, function(response) {
-                if(response.success) {
+                if(response.data.authenticate_result) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
                     $location.path('/');
                 } else {
-                    $scope.error = response.message;
+                    $scope.error = 'Invalid username or password';
                     $scope.dataLoading = false;
                 }
             });
@@ -38,23 +38,11 @@ angular.module('myApp.signin', ['ngRoute'])
  
         service.Login = function (username, password, callback) {
  
-            /* Dummy authentication for testing, uses $timeout to simulate api call
-             ----------------------------------------------*/
-            $timeout(function(){
-                var response = { success: username === 'miguel' && password === 'python' };
-                if(!response.success) {
-                    response.message = 'Username or password is incorrect';
-                }
-                callback(response);
-            }, 1000);
- 
- 
-            /* Use this for real authentication
-             ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
+            $http.post('http://127.0.0.1:5000/api/authenticate', { username: username, password: password })
+                .then(
+                function successCallback(response) {
+                    callback(response);
+                });
  
         };
   
@@ -68,7 +56,7 @@ angular.module('myApp.signin', ['ngRoute'])
                 }
             };
   
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
             $cookieStore.put('globals', $rootScope.globals);
         };
   
