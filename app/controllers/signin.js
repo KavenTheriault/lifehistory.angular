@@ -32,13 +32,13 @@ angular.module('myApp.signin', ['ngRoute'])
 )
 
 .factory('AuthenticationService',
-    ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
-    function (Base64, $http, $cookieStore, $rootScope, $timeout) {
+    ['CONFIG', 'Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
+    function (CONFIG, Base64, $http, $cookieStore, $rootScope, $timeout) {
         var service = {};
  
         service.Login = function (username, password, callback) {
  
-            $http.post('http://127.0.0.1:5000/api/authenticate', { username: username, password: password })
+            $http.post(CONFIG.api_url + '/api/authenticate', { username: username, password: password })
                 .then(
                 function successCallback(response) {
                     callback(response);

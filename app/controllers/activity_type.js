@@ -7,8 +7,8 @@ angular.module('myApp.activity_type',['ngRoute'])
   });
 }])
 
-.factory('ActivityType',function($resource){
-    return $resource('http://127.0.0.1:5000/api/activity_types/:id',{id:'@_id'},{
+.factory('ActivityType',function($resource, CONFIG){
+    return $resource(CONFIG.api_url + '/api/activity_types/:id',{id:'@_id'},{
         update: {
             method: 'PUT'
         }

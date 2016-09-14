@@ -11,6 +11,10 @@ angular.module('myApp', [
   'myApp.activity_type'
 ])
 
+.constant('CONFIG', {
+    api_url: 'http://127.0.0.1:5000',
+  })
+
 .config(['$routeProvider',
 	function($routeProvider) {
   		$routeProvider
