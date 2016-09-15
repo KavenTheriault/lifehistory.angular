@@ -8,7 +8,8 @@ angular.module('myApp', [
   'myApp.home',
   'myApp.signin',
   'myApp.signup',
-  'myApp.activity_types'
+  'myApp.activity_types',
+  'myApp.activities'
 ])
 
 .constant('CONFIG', {
