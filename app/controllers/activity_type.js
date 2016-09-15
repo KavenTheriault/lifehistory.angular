@@ -1,26 +1,66 @@
-angular.module('myApp.activity_type',['ngRoute'])
+angular.module('myApp.activity_types',['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/activity_type', {
-    templateUrl: 'views/activity_type.html',
-    controller: 'ActivityTypeController'
-  });
+  $routeProvider
+      .when('/activity_types', {
+        templateUrl: 'views/activity_types.html',
+        controller: 'ActivityTypesController'
+      })
+      .when('/activity_types/new', {
+        templateUrl: 'views/activity_type_create.html',
+        controller: 'ActivityTypeCreateController'
+      })
+      .when('/activity_types/:id/edit', {
+        templateUrl: 'views/activity_type_edit.html',
+        controller: 'ActivityTypeEditController'
+      });
 }])
 
 .factory('ActivityType',function($resource, CONFIG){
-    return $resource(CONFIG.api_url + '/api/activity_types/:id',{id:'@_id'},{
+    return $resource(CONFIG.api_url + '/api/activity_types/:id',{id:'@id'},{
         update: {
             method: 'PUT'
         }
     });
 })
 
-.controller('ActivityTypeController',function($scope, ActivityType){
+.controller('ActivityTypesController',function($scope, $location, ActivityType){
+    $scope.activity_types=ActivityType.query();
+
+    $scope.newActivityType=function(){
+        $location.path('/activity_types/new');
+    }
+
+    $scope.editActivityType=function($id){
+        $location.path('/activity_types/' + $id + '/edit');
+    }
+
+     $scope.deleteActivityType=function($activity_type){
+        $activity_type.$delete(function(){
+            var index = $scope.activity_types.indexOf($activity_type);
+            $scope.activity_types.splice(index, 1);
+        });
+    }
+
+})
+
+.controller('ActivityTypeCreateController',function($scope, $location, ActivityType){
     $scope.activity_type = new ActivityType();
 
-    $scope.create=function(){
+    $scope.createActivityType=function(){
         $scope.activity_type.$save(function(){
-            // Save success
+            $location.path('/activity_types');
+        });
+    }
+
+})
+
+.controller('ActivityTypeEditController',function($scope, $location, $routeParams, ActivityType){
+    $scope.activity_type=ActivityType.get({id:$routeParams.id});
+
+    $scope.editActivityType=function(){
+        $scope.activity_type.$update(function(){
+            $location.path('/activity_types');
         });
     }
 

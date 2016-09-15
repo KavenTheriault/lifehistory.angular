@@ -1,0 +1,14 @@
+<a ng-click="newActivityType()" class="btn-primary btn-lg nodecoration">Add New Activity Type</a>
+<table class="table activitytypetable">
+    <tr>
+        <td><h3>All Activity Types</h3></td>
+        <td></td>
+    </tr>
+    <tr ng-repeat="activity_type in activity_types">
+        <td>{{activity_type.name}}</td>
+        <td>
+            <a class="btn btn-primary" ng-click="editActivityType(activity_type.id)">Edit</a>
+            <a class="btn btn-danger" ng-click="deleteActivityType(activity_type)">Delete</a>
+        </td>
+    </tr>
+</table>

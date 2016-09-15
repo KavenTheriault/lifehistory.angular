@@ -8,11 +8,11 @@ angular.module('myApp', [
   'myApp.home',
   'myApp.signin',
   'myApp.signup',
-  'myApp.activity_type'
+  'myApp.activity_types'
 ])
 
 .constant('CONFIG', {
-    api_url: 'http://127.0.0.1:5000',
+    api_url: 'http://localhost:5000',
   })
 
 .config(['$routeProvider',
