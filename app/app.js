@@ -5,6 +5,7 @@ angular.module('myApp', [
   'ngResource',
   'ngRoute',
   'ngCookies',
+  'ngMaterial',
   'myApp.home',
   'myApp.signin',
   'myApp.signup',
