@@ -17,9 +17,17 @@ angular.module('myApp.activity_types',['ngRoute'])
 }])
 
 .factory('ActivityType',function($resource, CONFIG){
-    return $resource(CONFIG.api_url + '/api/activity_types/:id',{id:'@id'},{
+    return $resource(CONFIG.api_url + '/api/activity_types/:id:listCtrl/:param',{id:'@id'},{
         update: {
             method: 'PUT'
+        },
+        search: {
+            method: 'GET',
+            isArray: true,
+            params: {
+                listCtrl: 'search',
+                param: true
+            }
         }
     });
 })
