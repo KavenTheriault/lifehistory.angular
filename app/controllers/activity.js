@@ -66,36 +66,13 @@ angular.module('myApp.activities',['ngRoute'])
 
 })
 
-.controller('ActivityTypeSearch',function($scope, $timeout, $q, ActivityType){
-    var self = this;
+.controller('ActivityTypeSearch', function($scope, $q, ActivityType) {
 
-    self.selectedItem  = null;
-    self.searchText    = null;
-    self.querySearch   = querySearch;
-
-    function querySearch (query) {
+    $scope.searchActivityType = function(val) {
         var d = $q.defer();
-        var result = ActivityType.search({param:query}, function() {
+        var result = ActivityType.search({param:val}, function() {
             d.resolve(result);
         });
         return d.promise;
-    }
-
-})
-
-.controller('TypeaheadCtrl', function($scope, $http) {
-
-  $scope.getLocation = function(val) {
-    return $http.get('//maps.googleapis.com/maps/api/geocode/json', {
-      params: {
-        address: val,
-        sensor: false
-      }
-    }).then(function(response){
-      return response.data.results.map(function(item){
-        return item.formatted_address;
-      });
-    });
-  };
-  
+    };  
 });
