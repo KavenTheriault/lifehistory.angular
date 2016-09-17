@@ -5,16 +5,15 @@
 	</div>
 </div>
 
-<div class='container-fluid' ng-controller="ActivityTypeSearch">
-
-    <h4>Asynchronous results</h4>
-    <pre>Model: {{selected_activity_type.id}}</pre>
-    <input type="text" ng-model="$root.selected_activity_type" placeholder="Activity Type" uib-typeahead="activity_type as activity_type.name for activity_type in searchActivityType($viewValue)" typeahead-loading="loading" typeahead-no-results="noResults" class="form-control">
-    <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
-    <div ng-show="noResults">
-      <i class="glyphicon glyphicon-remove"></i> No Results Found
+<div class="form-group">
+	<label for="name" class="col-sm-2 control-label">Activity Type</label>
+	<div class="col-sm-10" ng-controller="ActivityTypeSearch">
+		<input type="text" ng-model="$root.selected_activity_type" placeholder="Activity Type" uib-typeahead="activity_type as activity_type.name for activity_type in searchActivityType($viewValue)" typeahead-loading="loading" typeahead-no-results="noResults" class="form-control">
+	    <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
+	    <div ng-show="noResults">
+	      <i class="glyphicon glyphicon-remove"></i> No Results Found
+	    </div>
     </div>
-
 </div>
 
 <br>
