@@ -44,10 +44,12 @@ angular.module('myApp.activities',['ngRoute'])
 
 })
 
-.controller('ActivityCreateController',function($scope, $location, Activity){
+.controller('ActivityCreateController',function($scope, $rootScope, $location, Activity){
     $scope.activity = new Activity();
 
     $scope.createActivity=function(){
+        $scope.activity.activity_type_id = $rootScope.selected_activity_type.id;
+
         $scope.activity.$save(function(){
             $location.path('/activities');
         });
@@ -55,10 +57,14 @@ angular.module('myApp.activities',['ngRoute'])
 
 })
 
-.controller('ActivityEditController',function($scope, $location, $routeParams, Activity){
-    $scope.activity=Activity.get({id:$routeParams.id});
-
+.controller('ActivityEditController',function($scope, $rootScope, $location, $routeParams, $log, Activity){
+    $scope.activity=Activity.get({id:$routeParams.id}, function(){
+            $rootScope.selected_activity_type = $scope.activity.activity_type;
+        });
+    
     $scope.editActivity=function(){
+        $scope.activity.activity_type_id = $rootScope.selected_activity_type.id;
+
         $scope.activity.$update(function(){
             $location.path('/activities');
         });
@@ -66,7 +72,8 @@ angular.module('myApp.activities',['ngRoute'])
 
 })
 
-.controller('ActivityTypeSearch', function($scope, $q, ActivityType) {
+.controller('ActivityTypeSearch', function($scope, $rootScope, $q, ActivityType) {
+    //$rootScope.selected_activity_type = null;
 
     $scope.searchActivityType = function(val) {
         var d = $q.defer();
@@ -74,5 +81,5 @@ angular.module('myApp.activities',['ngRoute'])
             d.resolve(result);
         });
         return d.promise;
-    };  
+    };
 });
