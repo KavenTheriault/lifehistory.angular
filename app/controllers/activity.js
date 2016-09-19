@@ -44,11 +44,29 @@ angular.module('myApp.activities',['ngRoute'])
 
 })
 
-.controller('ActivityCreateController',function($scope, $rootScope, $location, Activity){
+.factory('ActivityTypeSearch', function($q, ActivityType) {
+   var ActivityTypeSearch = {};
+
+   ActivityTypeSearch.searchActivityType = function(val) {
+        var d = $q.defer();
+        var result = ActivityType.search({param:val}, function() {
+            d.resolve(result);
+        });
+        return d.promise;
+    };
+
+    return ActivityTypeSearch;
+ })
+
+.controller('ActivityCreateController',function($scope, $location, Activity, ActivityTypeSearch){
     $scope.activity = new Activity();
 
+    $scope.searchActivityType = function(val) {
+        return ActivityTypeSearch.searchActivityType(val);
+    };
+
     $scope.createActivity=function(){
-        $scope.activity.activity_type_id = $rootScope.selected_activity_type.id;
+        $scope.activity.activity_type_id = $scope.selected_activity_type.id;
 
         $scope.activity.$save(function(){
             $location.path('/activities');
@@ -57,29 +75,21 @@ angular.module('myApp.activities',['ngRoute'])
 
 })
 
-.controller('ActivityEditController',function($scope, $rootScope, $location, $routeParams, $log, Activity){
+.controller('ActivityEditController',function($scope, $location, $routeParams, $log, Activity, ActivityTypeSearch){
     $scope.activity=Activity.get({id:$routeParams.id}, function(){
-            $rootScope.selected_activity_type = $scope.activity.activity_type;
+            $scope.selected_activity_type = $scope.activity.activity_type;
         });
     
+    $scope.searchActivityType = function(val) {
+        return ActivityTypeSearch.searchActivityType(val);
+    };
+
     $scope.editActivity=function(){
-        $scope.activity.activity_type_id = $rootScope.selected_activity_type.id;
+        $scope.activity.activity_type_id = $scope.selected_activity_type.id;
 
         $scope.activity.$update(function(){
             $location.path('/activities');
         });
     }
 
-})
-
-.controller('ActivityTypeSearch', function($scope, $rootScope, $q, ActivityType) {
-    //$rootScope.selected_activity_type = null;
-
-    $scope.searchActivityType = function(val) {
-        var d = $q.defer();
-        var result = ActivityType.search({param:val}, function() {
-            d.resolve(result);
-        });
-        return d.promise;
-    };
 });
