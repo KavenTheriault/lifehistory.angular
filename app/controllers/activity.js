@@ -24,7 +24,7 @@ angular.module('myApp.activities',['ngRoute'])
     });
 })
 
-.controller('ActivitiesController',function($scope, $location, Activity){
+.controller('ActivitiesController',function($window, $scope, $location, Activity){
     $scope.activities=Activity.query();
 
     $scope.newActivity=function(){
@@ -36,12 +36,16 @@ angular.module('myApp.activities',['ngRoute'])
     }
 
      $scope.deleteActivity=function($activity){
-        $activity.$delete(function(){
-            var index = $scope.activities.indexOf($activity);
-            $scope.activities.splice(index, 1);
-        });
-    }
 
+        var deleteConfirmation = $window.confirm('Are you absolutely sure you want to delete?');
+
+        if (deleteConfirmation) {
+            $activity.$delete(function(){
+                var index = $scope.activities.indexOf($activity);
+                $scope.activities.splice(index, 1);
+            });
+        }
+    }
 })
 
 .factory('ActivityTypeSearch', function($q, ActivityType) {

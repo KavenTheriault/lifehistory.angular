@@ -32,7 +32,7 @@ angular.module('myApp.activity_types',['ngRoute'])
     });
 })
 
-.controller('ActivityTypesController',function($scope, $location, ActivityType){
+.controller('ActivityTypesController',function($window, $scope, $location, ActivityType){
     $scope.activity_types=ActivityType.query();
 
     $scope.newActivityType=function(){
@@ -44,10 +44,15 @@ angular.module('myApp.activity_types',['ngRoute'])
     }
 
      $scope.deleteActivityType=function($activity_type){
-        $activity_type.$delete(function(){
-            var index = $scope.activity_types.indexOf($activity_type);
-            $scope.activity_types.splice(index, 1);
-        });
+
+         var deleteConfirmation = $window.confirm('Are you absolutely sure you want to delete?');
+
+        if (deleteConfirmation) {
+            $activity_type.$delete(function(){
+                var index = $scope.activity_types.indexOf($activity_type);
+                $scope.activity_types.splice(index, 1);
+            });
+        }
     }
 
 })
