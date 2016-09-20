@@ -79,7 +79,7 @@ angular.module('myApp.activities',['ngRoute'])
 
 })
 
-.controller('ActivityEditController',function($scope, $location, $routeParams, $log, Activity, ActivityTypeSearch){
+.controller('ActivityEditController',function($scope, $location, $routeParams, Activity, ActivityTypeSearch){
     $scope.activity=Activity.get({id:$routeParams.id}, function(){
             $scope.selected_activity_type = $scope.activity.activity_type;
         });
