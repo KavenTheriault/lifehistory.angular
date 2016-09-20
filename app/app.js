@@ -12,7 +12,8 @@ angular.module('myApp', [
   'myApp.signin',
   'myApp.signup',
   'myApp.activity_types',
-  'myApp.activities'
+  'myApp.activities',
+  'myApp.calendar'
 ])
 
 .constant('CONFIG', {
