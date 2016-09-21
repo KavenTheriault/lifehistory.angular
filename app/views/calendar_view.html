@@ -5,23 +5,23 @@
     </div>
 
     <table class="table activitytable">
-    <tr>
-        <td><h3>Life Entries</h3></td>
-        <td></td>
-    </tr>
+	    <tr>
+	        <td><h3>{{day.date}}</h3></td>
+	        <td></td>
+	    </tr>
 
-	<tbody ng-repeat="life_entry in day.life_entries">
-		<tr>
-			<td>{{life_entry.start_time}}</td>
-			<td>{{life_entry.end_time}}</td>
-		</tr>
-		<tr ng-repeat="life_entry_activity in life_entry.life_entry_activities">
-			<td>{{life_entry_activity.activity.activity_type.name}}</td>
-			<td>{{life_entry_activity.activity.name}}</td>
-			<td>{{life_entry_activity.description}}</td>
-		</tr>
-	<tbody>
-</table>
+		<tbody ng-repeat="life_entry in day.life_entries">
+			<tr>
+				<td>{{life_entry.start_time}}</td>
+				<td>{{life_entry.end_time}}</td>
+			</tr>
+			<tr ng-repeat="life_entry_activity in life_entry.life_entry_activities">
+				<td>{{life_entry_activity.activity.activity_type.name}}</td>
+				<td>{{life_entry_activity.activity.name}}</td>
+				<td>{{life_entry_activity.description}}</td>
+			</tr>
+		<tbody>
+	</table>
 
 <div class="form-group" ng-show="day.note">
 	<label for="note" class="col-sm-2 control-label">Note</label>
@@ -31,7 +31,7 @@
 </div>
 
 <button ng-click="newDay()" ng-hide="day.note" class="btn-primary btn-lg nodecoration">Create day</button>
-<button ng-click="editDay()" ng-show="day.note" class="btn-primary btn-lg nodecoration">Edit day</button>
+<button ng-click="editDay(day.id)" ng-show="day.note" class="btn-primary btn-lg nodecoration">Edit day</button>
 
 <br>
 <br>
