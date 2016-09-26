@@ -14,7 +14,8 @@ angular.module('myApp', [
   'myApp.activity_types',
   'myApp.activities',
   'myApp.calendar',
-  'myApp.life_entries'
+  'myApp.life_entries',
+  'myApp.life_entry_activities'
 ])
 
 .constant('CONFIG', {

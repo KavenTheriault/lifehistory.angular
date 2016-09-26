@@ -75,4 +75,12 @@ angular.module('myApp.life_entries',['ngRoute'])
             });
         }
     };
+
+    $scope.newLifeEntryActivity=function(){
+        $location.path('/life_entry_activities/new/' + $scope.life_entry.id);
+    };
+
+    $scope.editLifeEntryActivity=function($id){
+        $location.path('/life_entry_activities/' + $id + '/edit');
+    };
 });
