@@ -36,11 +36,14 @@ angular.module('myApp.life_entries',['ngRoute'])
     return TimeConverter;
  })
 
-.controller('LifeEntryCreateController',function($scope, $location, $routeParams, LifeEntry){
+.controller('LifeEntryCreateController',function($scope, $location, $routeParams, TimeConverter, LifeEntry){
     $scope.life_entry = new LifeEntry();
     $scope.life_entry.day_id = $routeParams.day_id;
 
     $scope.createLifeEntry=function(){
+        $scope.life_entry.start_time = TimeConverter.convertDateToTime($scope.start_date);
+        $scope.life_entry.end_time = TimeConverter.convertDateToTime($scope.end_date);
+
         $scope.life_entry.$save(function(){
             $location.path('/days/' + $scope.life_entry.day_id + '/edit');
         });
@@ -48,7 +51,7 @@ angular.module('myApp.life_entries',['ngRoute'])
 
 })
 
-.controller('LifeEntryEditController',function($scope, $location, $routeParams, TimeConverter, LifeEntry){
+.controller('LifeEntryEditController',function($window, $scope, $location, $routeParams, TimeConverter, LifeEntry){
     $scope.life_entry=LifeEntry.get({id:$routeParams.id}, function(){
         $scope.start_date = TimeConverter.convertTimeToDate($scope.life_entry.start_time);
         $scope.end_date = TimeConverter.convertTimeToDate($scope.life_entry.end_time);
@@ -61,5 +64,15 @@ angular.module('myApp.life_entries',['ngRoute'])
         $scope.life_entry.$update(function(){
             $location.path('/days/' + $scope.life_entry.day_id + '/edit');
         });
+    };
+
+    $scope.deleteLifeEntry=function($life_entry){
+        var deleteConfirmation = $window.confirm('Are you absolutely sure you want to delete?');
+
+        if (deleteConfirmation) {
+            $life_entry.$delete(function(){
+                $location.path('/days/' + $scope.life_entry.day_id + '/edit');
+            });
+        }
     };
 });

@@ -12,6 +12,23 @@
 	</div>
 </div>
 
+<table class="table lifeentryactivitytable">
+	<tbody ng-repeat="life_entry_activity in life_entry.life_entry_activities">
+		<tr>
+			<td>{{life_entry_activity.activity.activity_type.name}}</td>
+			<td>{{life_entry_activity.activity.name}}</td>
+			<td>{{life_entry_activity.description}}</td>
+			 <td>
+            <a class="btn btn-primary" ng-click="editLifeEntryActivity(life_entry_activity.id)">Edit</a>
+            <a class="btn btn-danger" ng-click="deleteLifeEntryActivity(life_entry_activity)">Delete</a>
+        </td>
+		</tr>
+	<tbody>
+</table>
+
+<a ng-click="newLifeEntryActivity()" class="btn-primary btn-lg nodecoration">Add New Life Entry Activity</a>
+<a class="btn btn-danger" ng-click="deleteLifeEntry(life_entry)">Delete</a>
+
 <br>
 <br>
 

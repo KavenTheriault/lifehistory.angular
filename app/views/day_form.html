@@ -10,7 +10,6 @@
 			<td>{{life_entry.end_time}}</td>
 			 <td>
             <a class="btn btn-primary" ng-click="editLifeEntry(life_entry.id)">Edit</a>
-            <a class="btn btn-danger" ng-click="deleteLifeEntry(life_entry)">Delete</a>
         </td>
 		</tr>
 		<tr ng-repeat="life_entry_activity in life_entry.life_entry_activities">
@@ -27,6 +26,8 @@
 		<input id="note" type="text" ng-model="day.note" class="form-control">
 	</div>
 </div>
+
+<a ng-click="newLifeEntry()" class="btn-primary btn-lg nodecoration">Create Life Entry</a>
 
 <br>
 <br>
