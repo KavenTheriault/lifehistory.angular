@@ -37,6 +37,8 @@ angular.module('myApp.life_entries',['ngRoute'])
  })
 
 .controller('LifeEntryCreateController',function($scope, $location, $routeParams, TimeConverter, LifeEntry){
+    $scope.save_and_add = false;
+
     $scope.life_entry = new LifeEntry();
     $scope.life_entry.day_id = $routeParams.day_id;
 
@@ -45,13 +47,18 @@ angular.module('myApp.life_entries',['ngRoute'])
         $scope.life_entry.end_time = TimeConverter.convertDateToTime($scope.end_date);
 
         $scope.life_entry.$save(function(){
-            $location.path('/days/' + $scope.life_entry.day_id + '/edit');
+            if ($scope.save_and_add) {
+                $location.path('/life_entry_activities/new/' + $scope.life_entry.id);
+            } else {
+                $location.path('/days/' + $scope.life_entry.day_id + '/edit');
+            }
         });
-    }
-
+    };
 })
 
 .controller('LifeEntryEditController',function($window, $scope, $location, $routeParams, TimeConverter, LifeEntry){
+    $scope.save_and_add = false;
+
     $scope.life_entry=LifeEntry.get({id:$routeParams.id}, function(){
         $scope.start_date = TimeConverter.convertTimeToDate($scope.life_entry.start_time);
         $scope.end_date = TimeConverter.convertTimeToDate($scope.life_entry.end_time);
@@ -62,7 +69,11 @@ angular.module('myApp.life_entries',['ngRoute'])
         $scope.life_entry.end_time = TimeConverter.convertDateToTime($scope.end_date);
 
         $scope.life_entry.$update(function(){
-            $location.path('/days/' + $scope.life_entry.day_id + '/edit');
+            if ($scope.save_and_add) {
+                $location.path('/life_entry_activities/new/' + $scope.life_entry.id);
+            } else {
+                $location.path('/days/' + $scope.life_entry.day_id + '/edit');
+            }
         });
     };
 
@@ -74,10 +85,6 @@ angular.module('myApp.life_entries',['ngRoute'])
                 $location.path('/days/' + $scope.life_entry.day_id + '/edit');
             });
         }
-    };
-
-    $scope.newLifeEntryActivity=function(){
-        $location.path('/life_entry_activities/new/' + $scope.life_entry.id);
     };
 
     $scope.editLifeEntryActivity=function($id){

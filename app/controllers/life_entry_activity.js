@@ -52,7 +52,7 @@ angular.module('myApp.life_entry_activities',['ngRoute'])
 
 })
 
-.controller('LifeEntryActivityEditController',function($scope, $location, $routeParams, LifeEntryActivity, ActivitySearch){
+.controller('LifeEntryActivityEditController',function($window, $scope, $location, $routeParams, LifeEntryActivity, ActivitySearch){
     $scope.life_entry_activity=LifeEntryActivity.get({id:$routeParams.id}, function(){
             $scope.selected_activity = $scope.life_entry_activity.activity;
         });
@@ -68,5 +68,15 @@ angular.module('myApp.life_entry_activities',['ngRoute'])
             $location.path('/life_entries/' + $scope.life_entry_activity.life_entry_id + '/edit');
         });
     }
+
+    $scope.deleteLifeEntryActivity=function($life_entry_activity){
+        var deleteConfirmation = $window.confirm('Are you absolutely sure you want to delete?');
+
+        if (deleteConfirmation) {
+            $life_entry_activity.$delete(function(){
+                $location.path('/life_entries/' + $life_entry_activity.life_entry_id + '/edit');
+            });
+        }
+    };
 
 });

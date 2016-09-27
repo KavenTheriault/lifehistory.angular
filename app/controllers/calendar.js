@@ -45,34 +45,36 @@ angular.module('myApp.calendar',['ngRoute'])
 })
 
 .controller('DayCreateController',function($scope, $location, $routeParams, Day){
+    $scope.save_and_add = false;
+
     $scope.day = new Day();
     $scope.day.date = $routeParams.date; //Need to stay a string for the api
 
     $scope.createDay=function(){
         $scope.day.$save(function(){
-            $location.path('/calendar');
+            if ($scope.save_and_add) {
+                $location.path('/life_entries/new/' + $scope.day.id);
+            } else {
+                $location.path('/calendar');
+            }
         });
-    }
-
-    $scope.newLifeEntry=function(){
-        $scope.day.$save(function(){
-            $location.path('/life_entries/new/' + $scope.day.id);
-        });
-    }
+    };
 })
 
 .controller('DayEditController',function($scope, $location, $routeParams, Day){
+    $scope.save_and_add = false;
+
     $scope.day=Day.get({id:$routeParams.id});
 
     $scope.editDay=function(){
         $scope.day.$update(function(){
-            $location.path('/calendar');
+            if ($scope.save_and_add) {
+                $location.path('/life_entries/new/' + $scope.day.id);
+            } else {
+                $location.path('/calendar');
+            }
         });
-    }
-
-    $scope.newLifeEntry=function(){
-        $location.path('/life_entries/new/' + $scope.day.id);
-    }
+    };
 
     $scope.editLifeEntry=function($id){
         $location.path('/life_entries/' + $id + '/edit');
