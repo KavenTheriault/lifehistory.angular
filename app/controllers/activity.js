@@ -83,8 +83,11 @@ angular.module('myApp.activities',['ngRoute'])
         $scope.activity.$save(function(){
             $location.path('/activities');
         });
-    }
+    };
 
+    $scope.goBack=function(){
+        $location.path('/activities');
+    };
 })
 
 .controller('ActivityEditController',function($scope, $location, $routeParams, Activity, ActivityTypeSearch){
@@ -102,6 +105,9 @@ angular.module('myApp.activities',['ngRoute'])
         $scope.activity.$update(function(){
             $location.path('/activities');
         });
-    }
+    };
 
+    $scope.goBack=function(){
+        $location.path('/activities');
+    };
 });

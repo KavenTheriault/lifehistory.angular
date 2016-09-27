@@ -64,8 +64,11 @@ angular.module('myApp.activity_types',['ngRoute'])
         $scope.activity_type.$save(function(){
             $location.path('/activity_types');
         });
-    }
+    };
 
+    $scope.goBack=function(){
+        $location.path('/activity_types');
+    };
 })
 
 .controller('ActivityTypeEditController',function($scope, $location, $routeParams, ActivityType){
@@ -75,6 +78,9 @@ angular.module('myApp.activity_types',['ngRoute'])
         $scope.activity_type.$update(function(){
             $location.path('/activity_types');
         });
-    }
+    };
 
+    $scope.goBack=function(){
+        $location.path('/activity_types');
+    };
 });

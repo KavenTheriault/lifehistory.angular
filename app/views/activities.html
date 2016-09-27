@@ -1,14 +1,20 @@
-<a ng-click="newActivity()" class="btn-primary btn-lg nodecoration">Add New Activity</a>
+<br>
+<h2>All Activities</h2>
+<br>
 <table class="table activitytable">
     <tr>
-        <td><h3>All Activities</h3></td>
-        <td></td>
+        <td><h4>Name</h4></td>
+        <td><h4>Activity Type</h4></td>
     </tr>
     <tr ng-repeat="activity in activities">
         <td>{{activity.name}}</td>
+        <td>{{activity.activity_type.name}}</td>
         <td>
             <a class="btn btn-primary" ng-click="editActivity(activity.id)">Edit</a>
             <a class="btn btn-danger" ng-click="deleteActivity(activity)">Delete</a>
         </td>
     </tr>
 </table>
+<button ng-click="newActivity()" class="btn btn-primary btn-lg">Add New Activity</button>
+<br>
+<br>

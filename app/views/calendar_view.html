@@ -1,12 +1,14 @@
 <div>
-    <h4>Calendar</h4>
-    <div>
-      <div uib-datepicker ng-model="selected_date" ng-change="loadDay()"></div>
-    </div>
+	<br>
+    <h2>Calendar</h2>
+	<br>
+	<div>
+		<div uib-datepicker ng-model="selected_date" ng-change="loadDay()"></div>
+	</div>
 
     <table class="table activitytable">
 	    <tr>
-	        <td><h3>{{day.date}}</h3></td>
+	        <td><h3>{{selected_date | date:'fullDate'}}</h3></td>
 	        <td></td>
 	    </tr>
 
@@ -30,8 +32,8 @@
 	</div>
 </div>
 
-<button ng-click="newDay()" ng-hide="day.note" class="btn-primary btn-lg nodecoration">Create day</button>
-<button ng-click="editDay(day.id)" ng-show="day.note" class="btn-primary btn-lg nodecoration">Edit day</button>
+<button ng-click="newDay()" ng-hide="day.id" class="btn btn-primary btn-lg">Create day</button>
+<button ng-click="editDay(day.id)" ng-show="day.id" class="btn btn-primary btn-lg">Edit day</button>
 
 <br>
 <br>

@@ -1,14 +1,22 @@
-<a ng-click="newActivityType()" class="btn-primary btn-lg nodecoration">Add New Activity Type</a>
+<br>
+<h2>All Activity Types</h2>
+<br>
 <table class="table activitytypetable">
     <tr>
-        <td><h3>All Activity Types</h3></td>
-        <td></td>
+        <td><h4>Name</h4></td>
+        <td><h4>Show quantity</h4></td>
+        <td><h4>Show rating</h4></td>
     </tr>
     <tr ng-repeat="activity_type in activity_types">
         <td>{{activity_type.name}}</td>
+        <td><input type="checkbox" ng-model="activity_type.show_quantity" onclick="return false;"></td>
+        <td><input type="checkbox" ng-model="activity_type.show_rating" onclick="return false;"#></td>
         <td>
             <a class="btn btn-primary" ng-click="editActivityType(activity_type.id)">Edit</a>
             <a class="btn btn-danger" ng-click="deleteActivityType(activity_type)">Delete</a>
         </td>
     </tr>
 </table>
+<button ng-click="newActivityType()" class="btn btn-primary btn-lg">Add New Activity Type</button>
+<br>
+<br>
