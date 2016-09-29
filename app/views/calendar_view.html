@@ -25,7 +25,7 @@
 				</thead>
 				<tbody ng-repeat="life_entry in day.life_entries">
 					<tr ng-repeat="life_entry_activity in life_entry.life_entry_activities">
-						<td>{{life_entry.start_time}}</td>
+						<td>{{$index==0 ? life_entry.start_time : ""}}</td>
 						<td>{{life_entry.end_time}}</td>
 						<td>{{life_entry_activity.activity.name}}</td>
 						<td>{{life_entry_activity.description}}</td>
