@@ -24,7 +24,7 @@ angular.module('myApp.life_entries',['ngRoute'])
     var TimeConverter = {};
 
     TimeConverter.convertTimeToDate = function(time_string) {
-        var full_date_string = '1970-01-01 ' + $filter('limitTo')(time_string, 8, 1);
+        var full_date_string = '1970-01-01 ' + time_string;
         return new Date(full_date_string);
     };
 

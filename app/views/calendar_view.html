@@ -6,31 +6,42 @@
 		<div uib-datepicker ng-model="selected_date" ng-change="loadDay()"></div>
 	</div>
 
-    <table class="table activitytable">
-	    <tr>
-	        <td><h3>{{selected_date | date:'fullDate'}}</h3></td>
-	        <td></td>
-	    </tr>
+	<h3>{{selected_date | date:'fullDate'}}</h3>
 
-		<tbody ng-repeat="life_entry in day.life_entries">
-			<tr>
-				<td>{{life_entry.start_time}}</td>
-				<td>{{life_entry.end_time}}</td>
-			</tr>
-			<tr ng-repeat="life_entry_activity in life_entry.life_entry_activities">
-				<td>{{life_entry_activity.activity.activity_type.name}}</td>
-				<td>{{life_entry_activity.activity.name}}</td>
-				<td>{{life_entry_activity.description}}</td>
-			</tr>
-		<tbody>
-	</table>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title panel_title_custom">All Activities</h3>
+		</div>
+		<div class="panel-body">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Time</th>
+						<th>End</th>
+						<th>Activity</th>
+						<th>Description</th>
+						<th>Rating (0-10)</th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="life_entry in day.life_entries">
+					<tr ng-repeat="life_entry_activity in life_entry.life_entry_activities">
+						<td>{{life_entry.start_time}}</td>
+						<td>{{life_entry.end_time}}</td>
+						<td>{{life_entry_activity.activity.name}}</td>
+						<td>{{life_entry_activity.description}}</td>
+						<td><span uib-rating ng-model="life_entry_activity.rating" max="10" read-only="true" ng-show="life_entry_activity.rating"></span></td>
+					</tr>
+				<tbody>
 
-<div class="form-group" ng-show="day.note">
-	<label for="note" class="col-sm-2 control-label">Note</label>
-	<div class="col-sm-10">
-		<input id="note" type="text" ng-model="day.note" class="form-control" ng-readonly="true">
+			</table>
+			<div ng-show="day.note">
+				<label for="note" class="col-sm-1 control-label">Note</label>
+				<div class="col-sm-10">
+					<input id="note" type="text" ng-model="day.note" ng-readonly="true">
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
 
 <button ng-click="newDay()" ng-hide="day.id" class="btn btn-primary btn-lg">Create day</button>
 <button ng-click="editDay(day.id)" ng-show="day.id" class="btn btn-primary btn-lg">Edit day</button>
