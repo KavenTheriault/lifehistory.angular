@@ -1,6 +1,6 @@
 <table class="table activitytable">
     <tr>
-        <td><h3>{{day.date}}</h3></td>
+        <td><h3>{{$parent.display_date | date:'fullDate'}}</h3></td>
         <td></td>
     </tr>
 
@@ -32,4 +32,9 @@
 <br>
 <br>
 
-<button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+<div class="form-actions">
+	<button class="btn btn-lg btn-primary" type="submit">Save</button>
+	<button ng-click="goBack()" class="btn btn-primary btn-lg">Back</button>
+</div>
+<br>
+<br>
