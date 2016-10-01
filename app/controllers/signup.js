@@ -9,6 +9,17 @@ angular.module('myApp.signup', ['ngRoute'])
   });
 }])
 
-.controller('SignUpCtrl', [function() {
-
-}]);
+.controller('SignUpCtrl',function($scope, AuthenticationService){
+    $scope.signup = function () {
+        $scope.dataLoading = true;
+        AuthenticationService.Register($scope.username, $scope.password, function(response) {
+            if(response.status == 201) {
+            	$scope.message = 'Account successfully created. You can now sign in.';
+            	$scope.dataLoading = false;
+            } else {
+                $scope.error = 'Invalid information. Please try again.';
+                $scope.dataLoading = false;
+            }
+        });
+    };
+});

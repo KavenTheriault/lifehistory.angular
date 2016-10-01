@@ -21,7 +21,7 @@ angular.module('myApp.signin', ['ngRoute'])
             AuthenticationService.Login($scope.username, $scope.password, function(response) {
                 if(response.data.authenticate_result) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
-                    $location.path('/');
+                    $location.path('/calendar');
                 } else {
                     $scope.error = 'Invalid username or password';
                     $scope.dataLoading = false;
@@ -44,6 +44,15 @@ angular.module('myApp.signin', ['ngRoute'])
                     callback(response);
                 });
  
+        };
+
+        service.Register = function (username, password, callback) {
+ 
+            $http.post(CONFIG.api_url + '/api/users', { username: username, password: password })
+                .then(
+                function successCallback(response) {
+                    callback(response);
+                });
         };
   
         service.SetCredentials = function (username, password) {

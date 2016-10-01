@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
 <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-<link rel="stylesheet" href="app.css">
+<link href="css/lavish-bootstrap.css" rel="stylesheet">
 <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
@@ -36,24 +36,26 @@
 		  <div id="navbar"
 		  class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-			  <li class="active">
-				<a href="#home">Home</a>
-			  </li>
-			  <li>
-				<a href="#signin">SignIn</a>
-			  </li>
-			  <li>
-				<a href="#signup">SignUp</a>
-			  </li>
-			  <li>
-				<a href="#activity_types">Activity Types</a>
-			  </li>
-			  <li>
-				<a href="#activities">Activities</a>
-			  </li>
-			   <li>
-				<a href="#calendar">Calendar</a>
-			  </li>
+				<li ng-hide="globals.currentUser">
+					<a href="#signin">SignIn</a>
+				</li>
+				<li ng-hide="globals.currentUser">
+					<a href="#signup">SignUp</a>
+				</li>
+				<li ng-show="globals.currentUser">
+					<a href="#calendar">Calendar</a>
+				</li>
+				<li ng-show="globals.currentUser">
+					<a href="#activity_types">Activity Types</a>
+				</li>
+				<li ng-show="globals.currentUser">
+					<a href="#activities">Activities</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li align="right" ng-show="globals.currentUser">
+					<a href="#" ng-click="logout()">Logout</a>
+				</li>
 			</ul>
 		  </div>
 		</div>

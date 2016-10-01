@@ -1,22 +1,30 @@
-<br>
-<h2>All Activity Types</h2>
-<br>
-<table class="table activitytypetable">
-    <tr>
-        <td><h4>Name</h4></td>
-        <td><h4>Show quantity</h4></td>
-        <td><h4>Show rating</h4></td>
-    </tr>
-    <tr ng-repeat="activity_type in activity_types">
-        <td>{{activity_type.name}}</td>
-        <td><input type="checkbox" ng-model="activity_type.show_quantity" onclick="return false;"></td>
-        <td><input type="checkbox" ng-model="activity_type.show_rating" onclick="return false;"#></td>
-        <td>
-            <a class="btn btn-primary" ng-click="editActivityType(activity_type.id)">Edit</a>
-            <a class="btn btn-danger" ng-click="deleteActivityType(activity_type)">Delete</a>
-        </td>
-    </tr>
-</table>
-<button ng-click="newActivityType()" class="btn btn-primary btn-lg">Add New Activity Type</button>
-<br>
-<br>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title panel_title_custom">Activity Types</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Show quantity</th>
+                    <th>Show rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="activity_type in activity_types">
+                    <td>{{activity_type.name}}</td>
+                    <td><input type="checkbox" ng-model="activity_type.show_quantity" onclick="return false;"></td>
+                    <td><input type="checkbox" ng-model="activity_type.show_rating" onclick="return false;"#></td>
+                    <td align="right">
+                        <button type="button" class="btn default btn-sm green" ng-click="editActivityType(activity_type.id)"><i class="glyphicon glyphicon-pencil"></i></button>
+                        <button type="button" class="btn default btn-sm red" ng-click="deleteActivityType(activity_type)"><i class="glyphicon glyphicon-trash"></i></button>
+                    </td>
+                </tr>
+            <tbody>
+        </table>
+        <div class="text-right">
+            <button type="button" class="btn btn-success btn-sm" ng-click="newActivityType()">Ajouter</button>
+        </div>
+    </div>
+</div>

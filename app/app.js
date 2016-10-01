@@ -26,12 +26,12 @@ angular.module('myApp', [
 .config(['$routeProvider',
 	function($routeProvider) {
   		$routeProvider
-  		.otherwise({redirectTo: '/home'});
+  		.otherwise({redirectTo: '/signin'});
 	}]
 )
 
-.run(['$rootScope', '$location', '$cookieStore', '$http',
-    function ($rootScope, $location, $cookieStore, $http) {
+.run(['$rootScope', '$location', '$cookieStore', '$http', 'AuthenticationService',
+    function ($rootScope, $location, $cookieStore, $http, AuthenticationService) {
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
@@ -40,9 +40,17 @@ angular.module('myApp', [
   
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in
-            if ($location.path() !== '/signin' && !$rootScope.globals.currentUser) {
+            if (($location.path() !== '/signin' && $location.path() !== '/signup') && !$rootScope.globals.currentUser) {
                 $location.path('/signin');
             }
+
+            if (($location.path() == '/signin' || $location.path() == '/signup') && $rootScope.globals.currentUser) {
+                $location.path('/calendar');
+            }
         });
+
+        $rootScope.logout=function(){
+          AuthenticationService.ClearCredentials();
+        };
     }]
 );
