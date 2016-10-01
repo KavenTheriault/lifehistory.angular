@@ -26,13 +26,12 @@
 				<tbody ng-repeat="life_entry in day.life_entries">
 					<tr ng-repeat="life_entry_activity in life_entry.life_entry_activities">
 						<td>{{$index==0 ? life_entry.start_time : ""}}</td>
-						<td>{{life_entry.end_time}}</td>
+						<td>{{$index==0 ? life_entry.end_time : ""}}</td>
 						<td>{{life_entry_activity.activity.name}}</td>
 						<td>{{life_entry_activity.description}}</td>
 						<td><span uib-rating ng-model="life_entry_activity.rating" max="10" read-only="true" ng-show="life_entry_activity.rating"></span></td>
 					</tr>
 				<tbody>
-
 			</table>
 			<div ng-show="day.note">
 				<label for="note" class="col-sm-1 control-label">Note</label>

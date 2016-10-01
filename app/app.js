@@ -7,6 +7,7 @@ angular.module('myApp', [
   'ngCookies',
   'ngAnimate',
   'ngSanitize',
+  'ngLocationUpdate',
   'ui.bootstrap',
   'myApp.home',
   'myApp.signin',

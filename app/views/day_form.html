@@ -1,24 +1,28 @@
-<table class="table activitytable">
-    <tr>
-        <td><h3>{{$parent.display_date | date:'fullDate'}}</h3></td>
-        <td></td>
-    </tr>
-
-	<tbody ng-repeat="life_entry in day.life_entries">
+<h3>{{$parent.display_date | date:'fullDate'}}</h3>
+<table class="table table-hover">
+	<thead>
 		<tr>
-			<td>{{life_entry.start_time}}</td>
-			<td>{{life_entry.end_time}}</td>
-			 <td>
-            <a class="btn btn-primary" ng-click="editLifeEntry(life_entry.id)">Edit</a>
-        </td>
+			<th>Time</th>
+			<th>End</th>
+			<th>Activity</th>
+			<th>Description</th>
+			<th>Rating (0-10)</th>
 		</tr>
+	</thead>
+	<tbody ng-repeat="life_entry in day.life_entries">
 		<tr ng-repeat="life_entry_activity in life_entry.life_entry_activities">
-			<td>{{life_entry_activity.activity.activity_type.name}}</td>
+			<td>{{$index==0 ? life_entry.start_time : ""}}</td>
+			<td>{{$index==0 ? life_entry.end_time : ""}}</td>
 			<td>{{life_entry_activity.activity.name}}</td>
 			<td>{{life_entry_activity.description}}</td>
+			<td><span uib-rating ng-model="life_entry_activity.rating" max="10" read-only="true" ng-show="life_entry_activity.rating"></span></td>
+			<td align="right" ng-show="$index==0">
+				<button type="button" class="btn default btn-sm green" ng-click="editLifeEntry(life_entry.id)"><i class="glyphicon glyphicon-pencil"></i></button>
+			</td>
 		</tr>
 	<tbody>
 </table>
+
 
 <div class="form-group">
 	<label for="note" class="col-sm-2 control-label">Note</label>

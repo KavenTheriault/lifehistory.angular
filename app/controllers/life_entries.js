@@ -42,6 +42,10 @@ angular.module('myApp.life_entries',['ngRoute'])
     $scope.life_entry = new LifeEntry();
     $scope.life_entry.day_id = $routeParams.day_id;
 
+    $scope.goBack=function(){
+        $location.path('/days/' + $scope.life_entry.day_id + '/edit');
+    };
+
     $scope.createLifeEntry=function(){
         $scope.life_entry.start_time = TimeConverter.convertDateToTime($scope.start_date);
         $scope.life_entry.end_time = TimeConverter.convertDateToTime($scope.end_date);
@@ -50,7 +54,7 @@ angular.module('myApp.life_entries',['ngRoute'])
             if ($scope.save_and_add) {
                 $location.path('/life_entry_activities/new/' + $scope.life_entry.id);
             } else {
-                $location.path('/days/' + $scope.life_entry.day_id + '/edit');
+                $scope.goBack();
             }
         });
     };
@@ -64,6 +68,10 @@ angular.module('myApp.life_entries',['ngRoute'])
         $scope.end_date = TimeConverter.convertTimeToDate($scope.life_entry.end_time);
     });
 
+    $scope.goBack=function(){
+        $location.path('/days/' + $scope.life_entry.day_id + '/edit');
+    };
+
     $scope.editLifeEntry=function(){
         $scope.life_entry.start_time = TimeConverter.convertDateToTime($scope.start_date);
         $scope.life_entry.end_time = TimeConverter.convertDateToTime($scope.end_date);
@@ -72,7 +80,7 @@ angular.module('myApp.life_entries',['ngRoute'])
             if ($scope.save_and_add) {
                 $location.path('/life_entry_activities/new/' + $scope.life_entry.id);
             } else {
-                $location.path('/days/' + $scope.life_entry.day_id + '/edit');
+                $scope.goBack();
             }
         });
     };
@@ -82,7 +90,7 @@ angular.module('myApp.life_entries',['ngRoute'])
 
         if (deleteConfirmation) {
             $life_entry.$delete(function(){
-                $location.path('/days/' + $scope.life_entry.day_id + '/edit');
+                $scope.goBack();
             });
         }
     };

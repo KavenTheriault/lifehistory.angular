@@ -38,6 +38,10 @@ angular.module('myApp.life_entry_activities',['ngRoute'])
     $scope.life_entry_activity = new LifeEntryActivity();
     $scope.life_entry_activity.life_entry_id = $routeParams.life_entry_id;
 
+    $scope.goBack=function(){
+        $location.path('/life_entries/' + $scope.life_entry_activity.life_entry_id + '/edit');
+    };
+
     $scope.searchActivity = function(val) {
         return ActivitySearch.searchActivity(val);
     };
@@ -46,7 +50,7 @@ angular.module('myApp.life_entry_activities',['ngRoute'])
         $scope.life_entry_activity.activity_id = $scope.selected_activity.id;
 
         $scope.life_entry_activity.$save(function(){
-            $location.path('/life_entries/' + $scope.life_entry_activity.life_entry_id + '/edit');
+            $scope.goBack();
         });
     }
 
@@ -57,6 +61,10 @@ angular.module('myApp.life_entry_activities',['ngRoute'])
             $scope.selected_activity = $scope.life_entry_activity.activity;
         });
     
+    $scope.goBack=function(){
+        $location.path('/life_entries/' + $scope.life_entry_activity.life_entry_id + '/edit');
+    };
+
     $scope.searchActivity = function(val) {
         return ActivitySearch.searchActivity(val);
     };
@@ -65,7 +73,7 @@ angular.module('myApp.life_entry_activities',['ngRoute'])
         $scope.life_entry_activity.activity_id = $scope.selected_activity.id;
 
         $scope.life_entry_activity.$update(function(){
-            $location.path('/life_entries/' + $scope.life_entry_activity.life_entry_id + '/edit');
+            $scope.goBack();
         });
     }
 
@@ -74,7 +82,7 @@ angular.module('myApp.life_entry_activities',['ngRoute'])
 
         if (deleteConfirmation) {
             $life_entry_activity.$delete(function(){
-                $location.path('/life_entries/' + $life_entry_activity.life_entry_id + '/edit');
+                $scope.goBack();
             });
         }
     };
