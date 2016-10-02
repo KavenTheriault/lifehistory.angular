@@ -1,44 +1,51 @@
-<h3>{{$parent.display_date | date:'fullDate'}}</h3>
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>Time</th>
-			<th>End</th>
-			<th>Activity</th>
-			<th>Description</th>
-			<th>Rating (0-10)</th>
-		</tr>
-	</thead>
-	<tbody ng-repeat="life_entry in day.life_entries">
-		<tr ng-repeat="life_entry_activity in life_entry.life_entry_activities">
-			<td>{{$index==0 ? life_entry.start_time : ""}}</td>
-			<td>{{$index==0 ? life_entry.end_time : ""}}</td>
-			<td>{{life_entry_activity.activity.name}}</td>
-			<td>{{life_entry_activity.description}}</td>
-			<td><span uib-rating ng-model="life_entry_activity.rating" max="10" read-only="true" ng-show="life_entry_activity.rating"></span></td>
-			<td align="right" ng-show="$index==0">
-				<button type="button" class="btn default btn-sm green" ng-click="editLifeEntry(life_entry.id)"><i class="glyphicon glyphicon-pencil"></i></button>
-			</td>
-		</tr>
-	<tbody>
-</table>
+<div class="page-header">
+	<h1>{{$parent.display_date | date:'longDate'}}</h1>
+</div>
 
-
-<div class="form-group">
-	<label for="note" class="col-sm-2 control-label">Note</label>
-	<div class="col-sm-10">
-		<input id="note" type="text" ng-model="day.note" class="form-control">
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title panel_title_custom">{{$parent.display_date | date:'EEEE'}}</h3>
+	</div>
+	<div class="panel-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Time</th>
+					<th>End</th>
+					<th>Activity</th>
+					<th>Description</th>
+					<th>Rating (0-10)</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="life_entry in day.life_entries">
+				<tr ng-repeat="life_entry_activity in life_entry.life_entry_activities">
+					<td>{{$index==0 ? life_entry.start_time : ""}}</td>
+					<td>{{$index==0 ? life_entry.end_time : ""}}</td>
+					<td>{{life_entry_activity.activity.name}}{{life_entry_activity.quantity > 1 ? " (" + life_entry_activity.quantity + ")": ""}}</td>
+					<td>{{life_entry_activity.description}}</td>
+					<td><span uib-rating ng-model="life_entry_activity.rating" max="10" read-only="true" ng-show="life_entry_activity.rating"></span></td>
+					<td align="right" ng-show="$index==0">
+						<button type="button" class="btn default btn-sm green" ng-click="editLifeEntry(life_entry.id)"><i class="glyphicon glyphicon-pencil"></i></button>
+					</td>
+				</tr>
+			<tbody>
+		</table>
+		<div class="text-right">
+            <button class="btn btn-success btn-sm" ng-click="$parent.save_and_add=true" type="submit">Add Life Entry</button>
+        </div>
 	</div>
 </div>
 
-<button ng-click="$parent.save_and_add=true" class="btn-primary btn-lg nodecoration" type="submit">Create Life Entry</button>
-
-<br>
-<br>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title panel_title_custom">Note</h3>
+	</div>
+	<div class="panel-body">
+		<textarea rows="5" ng-model="day.note" class="form-control"></textarea>
+	</div>
+</div>
 
 <div class="form-actions">
-	<button class="btn btn-lg btn-primary" type="submit">Save</button>
-	<button ng-click="goBack()" class="btn btn-primary btn-lg">Back</button>
+	<button class="btn btn-success btn-md" type="submit">Save</button>
+	<button ng-click="goBack()" class="btn btn-default btn-md">Back</button>
 </div>
-<br>
-<br>

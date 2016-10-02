@@ -1,0 +1,15 @@
+body {
+    padding-top: 15px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+}
+
+.glyph_row_actions {
+    margin-left: 8px;
+}
+
+.green {
+    color: #73A839;
+}
+
+.red {
+    color: #C71C22;
+}

@@ -20,6 +20,13 @@ angular.module('myApp.calendar',['ngRoute'])
       });
 }])
 
+.filter("nl2br", function($filter) {
+    return function(data) {
+        if (!data) return data;
+        return data.replace(/\n\r?/g, '<br />');
+    };
+})
+
 .factory('Day',function($resource, CONFIG){
     return $resource(CONFIG.api_url + '/api/days/:id:date',{id:'@id'},{
         update: {
