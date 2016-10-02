@@ -13,3 +13,8 @@ body {
 .red {
     color: #C71C22;
 }
+
+img {
+   max-width: 80%;
+   margin-bottom: 15px;
+}
