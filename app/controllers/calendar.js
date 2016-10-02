@@ -29,6 +29,13 @@ angular.module('myApp.calendar',['ngRoute'])
 })
 
 .controller('CalendarController',function($scope, $location, $routeParams, $filter, Day){
+    $("#my-datepicker").datepicker({ todayHighlight: true });
+
+    $("#my-datepicker").on('changeDate', function (e) {
+            $scope.selected_date = e.date;
+            $scope.loadDay();
+    });
+
     if ($routeParams.date != null) {
         var parts = $routeParams.date.split('-');
         $scope.selected_date = new Date(parts[0],parts[1]-1,parts[2]);
@@ -36,22 +43,42 @@ angular.module('myApp.calendar',['ngRoute'])
     else {
         $scope.selected_date = new Date();
     }
+
+    $('#my-datepicker').datepicker('update', $scope.selected_date);
     
     $scope.loadDay=function(){
         var date_string  = $filter('date')($scope.selected_date, 'yyyy-MM-dd');
         $scope.day=Day.get({date:date_string});
 
         $location.update_path('/calendar/' + date_string);
-    }
+    };
 
     $scope.newDay=function(){
         var date_string  = $filter('date')($scope.selected_date, 'yyyy-MM-dd');
         $location.path('/days/' + date_string + '/new');
-    }
+    };
 
     $scope.editDay=function($id){
         $location.path('/days/' + $id + '/edit');
-    }
+    };
+
+    $scope.nextDay=function($id){
+        var new_date = new Date($scope.selected_date);
+        new_date.setDate(new_date.getDate() + 1);
+        $scope.selected_date = new_date;
+
+        $('#my-datepicker').datepicker('update', $scope.selected_date);
+        $scope.loadDay();
+    };
+
+    $scope.previousDay=function($id){
+        var new_date = new Date($scope.selected_date);
+        new_date.setDate(new_date.getDate() - 1);
+        $scope.selected_date = new_date;
+
+        $('#my-datepicker').datepicker('update', $scope.selected_date);
+        $scope.loadDay();
+    };
 
     $scope.loadDay();
 })
