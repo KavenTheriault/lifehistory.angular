@@ -6,39 +6,39 @@
 <div class="well well-sm" align="center">
 	<div id="my-datepicker"></div>
 	<br>
-	<button type="button" class="btn btn-primary" ng-click="previousDay()">Précédent</button>
-	<button type="button" class="btn btn-primary" ng-click="nextDay()">Suivant</button>
+	<button type="button" class="btn btn-primary" ng-click="previousDay()">Previous</button>
+	<button type="button" class="btn btn-primary" ng-click="nextDay()">Next</button>
 </div>
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
 		<h3 class="panel-title panel_title_custom">{{selected_date | date:'EEEE'}}</h3>
 	</div>
-	<div class="panel-body">
-		<table class="table table-hover" ng-show="day.id">
+	<div class="panel-body table-responsive">
+		<table class="table" ng-show="day.id">
 			<thead>
 				<tr>
 					<th>Time</th>
 					<th>End</th>
 					<th>Activity</th>
 					<th>Description</th>
-					<th>Rating (0-10)</th>
+					<th>Rating</th>
 				</tr>
 			</thead>
 			<tbody ng-repeat="life_entry in day.life_entries">
 				<tr ng-repeat="life_entry_activity in life_entry.life_entry_activities">
-					<td>{{$index==0 ? life_entry.start_time : ""}}</td>
-					<td>{{$index==0 ? life_entry.end_time : ""}}</td>
+					<td>{{$index==0 ? (life_entry.start_time | limitTo: 5) : ""}}</td>
+					<td>{{$index==0 ? (life_entry.end_time | limitTo: 5) : ""}}</td>
 					<td>{{life_entry_activity.activity.name}}{{life_entry_activity.quantity > 1 ? " (" + life_entry_activity.quantity + ")": ""}}</td>
 					<td>{{life_entry_activity.description}}</td>
-					<td><span uib-rating ng-model="life_entry_activity.rating" max="10" read-only="true" ng-show="life_entry_activity.rating"></span></td>
+					<td>{{life_entry_activity.rating}} <span ng-show="life_entry_activity.rating" class="glyphicon glyphicon-star"></span></td>
 				</tr>
 			<tbody>
 		</table>
 
-        <p ng-hide="day.id">There are still no data for that day. Click the <mark>Create</mark> button to enter data.</p>
+        <p ng-hide="day.id">There are no data for that day. Click the <mark>Create</mark> button to enter data.</p>
         <div class="text-right" ng-hide="day.id">
-            <button type="button" class="btn btn-success btn-sm" ng-click="newDay()">Create</button>
+            <button type="button" class="btn btn-success btn-md" ng-click="newDay()">Create</button>
         </div>
 	</div>
 </div>
@@ -53,5 +53,5 @@
 </div>
 
 <div class="text-right" ng-show="day.id">
-    <button type="button" class="btn btn-success btn-sm" ng-click="editDay(day.id)">Edit</button>
+    <button type="button" class="btn btn-success btn-md" ng-click="editDay(day.id)">Edit</button>
 </div>

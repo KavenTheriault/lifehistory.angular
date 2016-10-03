@@ -1,5 +1,6 @@
 <div class="page-header">
-    <h1>Sign up</h1>
+    <h1 class="hidden-xs hidden-sm">Sign up</h1>
+    <h3 class="hidden-md hidden-lg">Sign up</h3>
 </div>
 
 <div ng-show="error" class="alert alert-danger">{{error}}</div>
@@ -16,12 +17,6 @@
         <i class="fa fa-lock"></i>
         <input type="password" name="password" id="password" class="form-control" ng-model="password" ng-minlength="6" required />
         <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
-    </div>
-    <div class="form-group">
-        <label for="password_confirmation">Confirm password</label>
-        <i class="fa fa-lock"></i>
-        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" ng-model="password" ng-minlength="6" required />
-        <span ng-show="form.password_confirmation.$dirty && form.password_confirmation.$error.required" class="help-block">Password confirmation is required</span>
     </div>
     <div class="form-actions">
         <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-success">Sign up</button>
