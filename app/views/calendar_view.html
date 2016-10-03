@@ -37,10 +37,10 @@
 		</table>
 
         <p ng-hide="day.id">There are no data for that day. Click the <mark>Create</mark> button to enter data.</p>
-        <div class="text-right" ng-hide="day.id">
-            <button type="button" class="btn btn-success btn-md" ng-click="newDay()">Create</button>
-        </div>
 	</div>
+</div>
+<div class="text-right" ng-hide="day.id">
+    <button type="button" class="btn btn-success btn-md" ng-click="newDay()">Create</button>
 </div>
 
 <div class="panel panel-primary" ng-show="day.note">
