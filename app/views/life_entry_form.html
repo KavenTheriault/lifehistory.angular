@@ -33,7 +33,7 @@
 			</thead>
 			<tbody ng-repeat="life_entry_activity in life_entry.life_entry_activities">
 				<tr>
-					<td>{{life_entry_activity.activity.name}}{{life_entry_activity.quantity > 1 ? " (" + life_entry_activity.quantity + ")": ""}}</td>
+					<td>{{life_entry_activity.activity.name}} <span ng-show="life_entry_activity.quantity>1" class="badge">{{life_entry_activity.quantity}}</span></td>
 					<td>{{life_entry_activity.description}}</td>
 					<td>{{life_entry_activity.rating}} <span ng-show="life_entry_activity.rating" class="glyphicon glyphicon-star"></span></td>
 					<td align="right">

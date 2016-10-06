@@ -18,11 +18,11 @@
 					<th>Rating</th>
 				</tr>
 			</thead>
-			<tbody ng-repeat="life_entry in day.life_entries">
+			<tbody ng-repeat="life_entry in day.life_entries | orderBy:'start_time'">
 				<tr ng-repeat="life_entry_activity in life_entry.life_entry_activities">
 					<td>{{$index==0 ? (life_entry.start_time | limitTo: 5) : ""}}</td>
 					<td>{{$index==0 ? (life_entry.end_time | limitTo: 5) : ""}}</td>
-					<td>{{life_entry_activity.activity.name}}{{life_entry_activity.quantity > 1 ? " (" + life_entry_activity.quantity + ")": ""}}</td>
+					<td>{{life_entry_activity.activity.name}} <span ng-show="life_entry_activity.quantity>1" class="badge">{{life_entry_activity.quantity}}</span></td>
 					<td>{{life_entry_activity.description}}</td>
 					<td>{{life_entry_activity.rating}} <span ng-show="life_entry_activity.rating" class="glyphicon glyphicon-star"></span></td>
 					<td align="right" ng-show="$index==0">
