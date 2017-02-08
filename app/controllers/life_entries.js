@@ -13,9 +13,16 @@ angular.module('myApp.life_entries',['ngRoute'])
 }])
 
 .factory('LifeEntry',function($resource, CONFIG){
-    return $resource(CONFIG.api_url + '/api/life_entries/:id',{id:'@id'},{
+    return $resource(CONFIG.api_url + '/api/life_entries/:id:listCtrl/',{id:'@id'},{
         update: {
             method: 'PUT'
+        },
+        search: {
+            method: 'POST',
+            isArray: true,
+            params: {
+                listCtrl: 'search'
+            }
         }
     });
 })
