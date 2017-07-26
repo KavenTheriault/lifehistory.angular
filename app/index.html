@@ -14,6 +14,7 @@
 <link href="css/lavish-bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-datepicker.css" rel="stylesheet">
 <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+<base href="/" />
 </head>
 
 <body>
@@ -29,32 +30,32 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#">Life History</a>
+		      <a class="navbar-brand" href="/">Life History</a>
 		    </div>
 		    <div class="collapse navbar-collapse" id="myNavbar">
 		      <ul class="nav navbar-nav">
 		        <li ng-hide="globals.currentUser">
-					<a href="#signin"><span class="glyphicon glyphicon-log-out"> LogIn</a>
+					<a href="signin"><span class="glyphicon glyphicon-log-out"> LogIn</a>
 				</li>
 				<li ng-hide="globals.currentUser">
-					<a href="#signup"><span class="glyphicon glyphicon-user"> SignUp</a>
+					<a href="signup"><span class="glyphicon glyphicon-user"> SignUp</a>
 				</li>
 				<li ng-show="globals.currentUser">
-					<a href="#calendar"><span class="glyphicon glyphicon-calendar"></span> Calendar</a>
+					<a href="calendar"><span class="glyphicon glyphicon-calendar"></span> Calendar</a>
 				</li>
 				<li ng-show="globals.currentUser">
-					<a href="#search"><span class="glyphicon glyphicon-search"></span> Search</a>
+					<a href="search"><span class="glyphicon glyphicon-search"></span> Search</a>
 				</li>
 				<li ng-show="globals.currentUser">
-					<a href="#activity_types"><span class="glyphicon glyphicon-tag"></span> Categories</a>
+					<a href="activity_types"><span class="glyphicon glyphicon-tag"></span> Categories</a>
 				</li>
 				<li ng-show="globals.currentUser">
-					<a href="#activities"><span class="glyphicon glyphicon-tags"></span> Activities</a>
+					<a href="activities"><span class="glyphicon glyphicon-tags"></span> Activities</a>
 				</li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li align="right" ng-show="globals.currentUser">
-					<a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"> Logout</a>
+					<a href="/" ng-click="logout()"><span class="glyphicon glyphicon-log-out"> Logout</a>
 				</li>
 		      </ul>
 		    </div>

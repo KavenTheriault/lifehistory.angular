@@ -24,10 +24,10 @@ angular.module('myApp', [
     api_url: 'http://107.172.11.251:5000',
   })
 
-.config(['$routeProvider',
-	function($routeProvider) {
-  		$routeProvider
-  		.otherwise({redirectTo: '/signin'});
+.config(['$routeProvider', '$locationProvider',
+	function($routeProvider, $locationProvider) {
+  		$routeProvider.otherwise({redirectTo: '/signin'});
+      $locationProvider.html5Mode(true).hashPrefix('');
 	}]
 )
 
