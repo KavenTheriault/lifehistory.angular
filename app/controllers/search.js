@@ -28,6 +28,7 @@ angular.module('myApp.search', ['ngRoute'])
             'activity_type_id': angular.isUndefinedOrNull($scope.selected_activity_type) ? $scope.selected_activity_type : $scope.selected_activity_type.id,
             'start_date': $scope.start_date,
             'end_date': $scope.end_date,
+            'text': $scope.text,
         };
 
         $scope.results = LifeEntry.search(requestBody);
