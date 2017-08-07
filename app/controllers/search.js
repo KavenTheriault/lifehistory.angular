@@ -33,4 +33,8 @@ angular.module('myApp.search', ['ngRoute'])
 
         $scope.results = LifeEntry.search(requestBody);
     };
+
+    $scope.viewDay = function($id) {
+        $location.path('/calendar/' + $id);
+    };
 });
