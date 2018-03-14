@@ -21,7 +21,7 @@ angular.module('myApp', [
 ])
 
 .constant('CONFIG', {
-    api_url: 'http://107.172.11.251:5000',
+    api_url: 'http://0.0.0.0:5000',
   })
 
 .config(['$routeProvider', '$locationProvider',
