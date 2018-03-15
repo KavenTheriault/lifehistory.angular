@@ -9,3 +9,7 @@
 .logo {
 	width: inherit;
 }
+
+.white-bg {
+	background: #ffffff90 !important;
+}
