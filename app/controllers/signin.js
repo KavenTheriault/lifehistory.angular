@@ -46,9 +46,9 @@ angular.module('myApp.signin', ['ngRoute'])
  
         };
 
-        service.Register = function (username, password, callback) {
+        service.Register = function (username, password, name, callback) {
  
-            $http.post(CONFIG.api_url + '/api/users', { username: username, password: password })
+            $http.post(CONFIG.api_url + '/api/users', { username: username, password: password, name: name })
                 .then(
                 function successCallback(response) {
                     callback(response);

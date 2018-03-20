@@ -12,7 +12,7 @@ angular.module('myApp.signup', ['ngRoute'])
 .controller('SignUpCtrl',function($scope, AuthenticationService){
     $scope.signup = function () {
         $scope.dataLoading = true;
-        AuthenticationService.Register($scope.username, $scope.password, function(response) {
+        AuthenticationService.Register($scope.username, $scope.password, $scope.name, function(response) {
             if(response.status == 201) {
             	$scope.message = 'Account successfully created. You can now sign in.';
             	$scope.dataLoading = false;
